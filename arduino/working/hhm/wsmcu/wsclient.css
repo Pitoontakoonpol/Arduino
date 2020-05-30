@@ -1,0 +1,69 @@
+.cam-caption {
+  font: normal 16px sans-serif;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  opacity: 0.5;
+  color: #fff;
+}
+#TIME-COUNTDOWN {
+  font: bold 35px courier;
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+  padding: 5px 10px;
+  text-align: center;
+  border: solid 3px gray;
+  border-radius: 15px;
+  background-color: #ddd;
+}
+
+#PLAYER-DISPLAY {
+  position: absolute;
+  width: 100%;
+  background-color: lightgreen;
+  padding: 3px;
+  height: 19px;
+}
+.option-btn {
+  display: none;
+  max-width: 200px;
+}
+#REWARD-LIST {
+  clear: both;
+  margin-top: 120px;
+}
+.reward-node {
+  float: left;
+  margin: 5px;
+  border: solid 1px #ccc;
+  border-radius: 10px;
+  background-color: #ddd;
+}
+.reward-node-title {
+  font: normal 14px sans-serif;
+  padding: 5px;
+}
+.reward-node img {
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+.cwl-line {
+  clear: both;
+  background-color: #ddd;
+  height: 16px;
+  padding: 2px;
+  margin-top: 2px;
+}
+.cwl-number {
+  float: left;
+}
+.cwl-name {
+  float: left;
+  padding-left: 3px;
+}
+.cwl-time {
+  float: right;
+  padding-left: 10px;
+}

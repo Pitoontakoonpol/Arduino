@@ -1,0 +1,152 @@
+
+#SECTION-TOP {
+  z-index:100;
+  position:fixed;
+  top:0px;
+  width:100%;
+  height:70px;
+  padding-left:60px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  white-space:nowrap;
+  display:inline-block;
+  background-color:rgba(0, 0, 0, 0.7);
+}
+#SECTION-MENU {
+  padding-top:70px;
+  padding-right:350px;
+  background-color:#111;
+}
+
+#DIALOG-ORDER-LIST-SUPERMARKET {
+  background-color:#000;
+  padding:70px 350px 0 10px;
+}
+#SECTION-RIGHT {
+  position:fixed;
+  top:60px;
+  right:-350px;
+  width:350px;
+  background-color:#222;
+  box-shadow:0 5px 15px #000;
+  border-radius:5px 0 0 0;
+  /* height defined onload */
+}
+
+#SECTION-TOPUP {
+    display:none;
+    left:0;
+  position:fixed;
+  white-space:nowrap;
+  bottom:0;
+  overflow-x:scroll;
+}
+#SECTION-DEVELOPER {
+  position:fixed;
+  right:0;
+  bottom:120px;
+  width:200px;
+  background-color:blue;
+  padding:10px;
+}
+.suspend-list{
+  position:relative;
+  margin-top:5px;
+  height:50px;
+  padding:10px;
+  font:bold 20px sans-serif;
+  color:black;
+  background-color:#f5f5f5;
+  border:solid 1px #ccc;
+  border-radius:5px;
+}
+.suspend-list span{
+  font:normal 12px sans-serif;
+  color:gray;
+}
+
+  .MENU-TYPE-BAR{
+    clear:both;
+    color:#fff;
+    padding:8px;
+    font:normal 18px sans-serif;
+    background-color:#000;
+  }
+  .MENU-NODE{
+    float:left;
+    text-align:center;
+    height:270px;
+    width:200px;
+    /*width defined by img*/
+    margin:8px;
+    font:normal 15px sans-serif;
+    border-radius:3px;
+    padding:1px;
+    box-shadow:0 0 3px #000;
+    background-color:#fff;
+  }
+  .DISPLAY-PIC {
+    background:url('../../img/anonymous180.png')  no-repeat;
+    position:relative;
+  }
+  .DISPLAY-PIC img{
+    width:200px;
+    height:200px;
+    border-radius:3px;
+  }
+  .MENU-ORDER-QTY{
+    display:none;
+    position:absolute;
+    margin:-1px;
+    top:0;
+    left:0;
+    padding:5px 10px;
+    background-color:orange;
+    font:bold 30px sans-serif;
+    border-radius:3px 0 10px 0;
+    box-shadow:2px 2px 10px #555;
+
+  }
+  .DISPLAY-CODE{
+    padding:2px;
+    position:absolute;
+    bottom:5px;
+    font:normal 12px sans-serif;
+    text-shadow: 0 0  5px #fff;
+    text-align:left;
+  }
+  .TOPUP-NODE{
+    display: inline-block;
+    background-color:#fff;
+    margin:3px;
+    box-shadow: 0 0  30px #000;
+    border-radius:10px;
+    text-align:center;
+    font:normal 13px sans-serif;
+    padding:1px;
+    max-width:102px;
+  }
+  .TOPUP-NODE img{
+    width:100px;
+    border-radius:10px;
+  }
+  #POPUP-SUSPEND{
+      position:fixed;
+      width:600px;
+      top:10px;
+      
+  }
+
+@media print{
+
+  #INVOICE-PAPER{
+    display:block;
+  }
+  #SECTION-TOP,#DIALOG-ORDER-LIST-SUPERMARKET,#SECTION-MENU,#SECTION-RIGHT,#SECTION-BOTTOM,#SECTION-DEVELOPER,#HEADER-SECTION,#INVOICE-PRINT{
+    display:none;
+  }
+  body{
+    margin:0;
+    background-color:#fff;
+  }
+}

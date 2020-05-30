@@ -1,0 +1,66 @@
+
+.ui-icon-print:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/print.svg");
+    background-size:15px 15px;
+}
+.ui-icon-export:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/export.svg");
+    background-size:15px 15px;
+}
+.ui-icon-save:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/save.svg");
+    background-size:30px 30px;
+}
+.ui-icon-stock_import:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/stock_import.svg");
+    background-size:30px 30px;
+}
+.ui-icon-stock_export:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/stock_export.svg");
+    background-size:30px 30px;
+}
+.ui-icon-stock_do:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/stock_do.svg");
+    background-size:30px 30px;
+}
+.ui-icon-stock_po:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/stock_po.svg");
+    background-size:30px 30px;
+}
+.ui-icon-enter:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/enter.svg");
+    background-size:30px 30px;
+}
+.ui-icon-finish:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/finish.svg");
+    background-size:30px 30px;
+}
+.ui-icon-void:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/void.svg");
+    background-size:30px 30px;
+}
+.ui-icon-void-gray:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/void_gray.svg");
+    background-size:30px 30px;
+}
+.ui-icon-void-red:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/void_red.svg");
+    background-size:30px 30px;
+}
+.ui-icon-tax:after {
+    background-color:transparent;
+    background-image: url("../img/jicon/tax.svg");
+    background-size:30px 30px;
+}

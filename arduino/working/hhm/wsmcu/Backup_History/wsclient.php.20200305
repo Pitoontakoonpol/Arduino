@@ -1,0 +1,255 @@
+<?php
+$id = $_GET['id'];
+$v = $_GET['v'];
+$p = $_GET['p'];
+$t = $_GET['t'];
+?>
+<html class="htmlClass">
+    <head>  
+        <title>Ambient:NodeMCU</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0"/>
+        <link rel="stylesheet" href="../class/jquery.mobile-1.4.5.min.css">
+        <script src="../class/jquery-1.11.3.min.js"></script>
+        <script src="../class/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript">
+            //var sock = new WebSocket("ws://192.168.1.95:1919");  //replace this address with the one the node.js server prints out. keep port 1919
+            var sock = new WebSocket("ws://103.76.180.24:1919");  //replace this address with the one the node.js server prints out. keep port 1919
+            var display = document.getElementById("display");
+            var id = 'MCU<?= $id ?>';
+            sock.onopen = function (event) {
+                //alert("Socket connected succesfully!!!")
+                setTimeout(function () {
+                    sock.send(id + ' Controller Handshaked');
+                }, 1000);
+                display.innerHTML += "connection succeeded <br />";
+            };
+            sock.onmessage = function (event) {
+                console.log(event);//show received from server data in console of browser
+                display.innerHTML += event.data + "<br />"; //add incoming message from server to the log screen previous string + new string(message)
+            };
+
+
+
+
+            var ww = window.innerWidth;
+            var wh = window.innerHeight;
+
+
+            $(document).ready(function () {
+                infras();
+
+                //Smartphone Event
+                $(".command-btn").bind('touchstart', function () {
+                    var cmd = $(this).attr("cmd");
+                    send_command(cmd);
+                    $("#command_note").val(cmd + ' mouse down ');
+                    $(this).css("fill", "#00FF00");
+
+                });
+                $(".command-btn").bind('touchend', function () {
+                    $(this).css("fill", "#CCCCCC");
+                    send_command('TX0');
+                    $("#command_note").val('TX0 mouse up ');
+                });
+
+            });
+
+            function infras() {
+
+                count_time();
+            }
+            function count_time() {
+                var counter = parseInt($('#T').val());
+                var interval = setInterval(function () {
+                    counter--;
+
+
+                    if ($("#TIME-COUNTDOWN").text() === '-') {
+                        counter = 0;
+                        clearInterval(interval);
+                    } else if (counter === 0) {
+                        clearInterval(interval);
+                        send_command('TX5');
+                    }
+
+                    if (counter < 10) {
+                        var counter_text = '00:0' + counter;
+                    } else {
+                        var counter_text = '00:' + counter;
+                    }
+
+                    $("#TIME-COUNTDOWN").text(counter_text);
+                }, 1000);
+            }
+
+            function send_command(command) {
+                var id = $("#id").val();
+                var TY = $("#TY").val();
+
+                if (command === 'TX5') {
+                    $("#TIME-COUNTDOWN").text('-');
+                    $(".command-btn").attr("class", 'recent_class');
+                    $(".control").attr("onmousedown", '');
+                    $(".control").attr("onmouseup", '');
+
+                    $("#REWARD-DISPLAY").text('WAITING....');
+
+                    var RWD = setTimeout(function () {
+                        check_reward();
+                    }, 10000);
+                }
+
+                if (command !== "") {
+                    sock.send(id + "_" + command + "TY" + TY);    //send string to server
+                } else {
+                    console.log("empty string not sent");
+                }
+                $("#command_note").val(id + "_" + command + "TY" + TY);
+            }
+            function check_reward() {
+                $("#REWARD-DISPLAY").text('checking');
+                sock.send("20200002_TX7TY888888");    //send string to server
+                sock.onmessage = function (msgevent) {
+                    console.log('in :', msgevent.data);
+                    var reward_respond = msgevent.data;
+                    var reward_result = reward_respond.split(":");
+                    reward_result = reward_result[2];
+                    if (reward_result === '1') {
+                        $("#REWARD-DISPLAY").text('HOOOOOOOOOOOORAYYY!');
+                    } else {
+                        $("#REWARD-DISPLAY").text('SORRY :(');
+                    }
+                };
+            }
+            function switch_camera() {
+                if ($("#cam1").is(":visible")) {
+                    $("#cam1").slideUp(300);
+                    $("#cam2").slideDown(300);
+                } else {
+                    $("#cam1").slideDown(300);
+                    $("#cam2").slideUp(300);
+
+                }
+
+            }
+        </script>
+        <style>
+            iframe{
+                /*position:fixed;*/
+                width:100%;
+                /*height:30%;*/
+                /*object-fit:cover;*/
+            }
+            .control{
+                width:50px;
+                height:50px;
+            }
+        </style>	
+
+    </head>
+    <body>
+        <div style="top:0;width:100%;background-color:#222;padding:3px;">
+            <button class="ui-btn ui-btn-icon-left ui-icon-back ui-btn-inline ui-corner-all" onclick="location.href = '../'">Back</button>
+            <div style="clear:both;"></div>
+        </div>
+
+        <div id="cam1" style="position:relative;background-color:#000;max-width:400px;">
+            <iframe src="http://103.76.180.24:81/client_20200002" style="height:200px;" ></iframe>
+            <div class="cam-caption">CAM 1</div>
+        </div>
+
+        <div id="cam2" style="display:none;position:relative;background-color:#000;max-width:400px;">
+            <iframe src="http://103.76.180.24:81/client_20200001" style="height:200px;"></iframe>
+            <div class="cam-caption">CAM 2</div>
+        </div>     
+        <div id="REWARD-DISPLAY" style="font:normal 30px sans-serif;"></div>
+        <div style="display:none;position:fixed;left:10px;bottom:5px;width:100%;" id="BTN-CONTROL">
+            <div id="svgi"style="max-width:200px">
+                <?php
+                include("../img/control_btn.svg");
+                ?>
+
+            </div>
+            <div style="position:fixed;bottom:100px;right:20px;width:100px;" onclick="switch_camera()">
+                <img src="../img/cam-view.svg" style="width:100%">
+            </div>
+
+            <div id="TIME-COUNTDOWN"></div>
+        </div>
+        <div style='display:none;position:absolute;bottom:10px;width:150px;left:1200px' id="AREA-DEV">
+            <div>
+                <table>
+                    <tr>
+                        <td></td>
+                        <td><button class="control" onmousedown="send_command('TX1')" onmouseup="send_command('TX0')">↑</button></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><button class="control" onmousedown="send_command('TX3')" onmouseup="send_command('TX0')">←</button></td>
+                        <td><button class="control" onclick="send_command('TX5')">G</button></td>
+                        <td><button class="control" onmousedown="send_command('TX4')" onmouseup="send_command('TX0')">→</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button class="control" onmousedown="send_command('TX2')" onmouseup="send_command('TX0')">↓</button></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan='3'>
+                            <button onclick="check_reward()">C-Reward</button>
+                            <button onclick="send_command('TX8')">C-Reverse</button>
+                            <button onclick="send_command('TX9')">Reset</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <input type="text" id="id" placeholder="id" value="<?= $id ?>">
+            <input type="text" id="command_note" placeholder="command">
+            <input type="text" id="TY" value="<?= $p / 19 ?>" placeholder="TY">
+            <input type="text" id="T" value="<?= $t / 19 ?>" placeholder="Timg">
+
+        </div>
+        <div style='display:none'>
+            <div id="spare">-return-</div>
+        </div>
+        <?php
+        if ($_GET['p'] AND $_GET['t']) {
+            ?>
+            <script type="text/javascript">
+                $("#BTN-CONTROL").show();
+                $("#AREA-DEV").show();
+            </script>
+
+            <?php
+        } else {
+            ?>
+            <script type="text/javascript">
+                $("#cam2").show();
+            </script>
+            <?php
+        }
+        ?>
+        <style type="text/css">
+            .cam-caption{
+                position:absolute;
+                bottom:10px;
+                right:10px;
+                color:#fff;
+                opacity: 0.5;
+                font:normal 16px sans-serif;
+            }
+            #TIME-COUNTDOWN{
+                position:fixed;
+                bottom:5px;
+                right:5px;                
+                text-align:center;
+                background-color:yellow;
+                border:solid 3px gray;
+                border-radius:5px;
+                padding:5px 10px;
+                font:bold 35px courier;
+            }
+        </style>
+    </body>
+</html>

@@ -1,0 +1,168 @@
+body {
+    margin: 0px;
+    background: #FFFFFF;
+    font-family: sans-serif;
+}
+@font-face {
+    font-family: 'circular';
+    src: url('fonts/Circular.eot?') format('eot'), url('fonts/Circular.ttf') format('truetype');
+}
+@font-face {
+    font-family: barcode;
+    src: url(fonts/3of9.woff);
+}
+.notify {
+    position:fixed;
+    z-index:100;
+    top:-50px;
+    left:50%;
+    font-size:16px;
+    text-align:center;
+    margin-left:-150px;
+    width:300px;
+    padding:10px 0px;  
+    box-shadow:0px 0px 15px 5px #ccc;
+    -moz-box-shadow:0px 0px 15px 5px #ccc;
+    -webkit-box-shadow:0px 0px 15px 5px #ccc;
+    border-radius:0 0 10px 10px;
+    -moz-border-radius:0 0 10px 10px;
+    -radius-border-radius:0 0 10px 10px;
+}
+a {
+    text-decoration: none;
+}
+.circular{
+    font-family: circular;
+}
+.fz30{
+    font-size:30px;
+}
+.fz20{
+    font-size:20px;
+}
+.fs10 {
+    font: normal 10px sans-serif;
+}
+.fs12 {
+    font: normal 12px sans-serif;
+}
+.fs14 {
+    font: normal 14px sans-serif;
+}
+.fs16 {
+    font: normal 16px sans-serif;
+}
+.fs18 {
+    font: normal 18px sans-serif;
+}
+.fs20 {
+    font: normal 20px sans-serif;
+}
+.fs30 {
+    font: normal 30px sans-serif;
+}
+.normal {
+    font-weight: normal;
+}
+.bold {
+    font-weight: bold;
+}
+.italic {
+    font-style: italic;
+}
+.underline {
+    text-decoration: underline;
+}
+.left {
+    text-align: left;
+}
+.right {
+    text-align: right;
+}
+.center {
+    text-align: center;
+}
+.cursor {
+    cursor: hand;
+    cursor: pointer;
+}
+.none {
+    display: none;
+}
+.bg1 {
+    background-color:#201b1a;
+}
+.bg2 {
+    background-color:#43382c;
+}
+.bg3 {
+    background-color:#645442;
+}
+.bg4 {
+    background-color:#867058;
+}
+.bg5 {
+    background-color:#a78c6e;
+}
+.bg6 {
+    background-color:#b9a38b;
+}
+.bg7 {
+    background-color:#cabaa8;
+}
+.bg8 {
+    background-color:#ede8e2;
+}
+.fg1 {
+    background-color:#282114;
+}
+.fg2 {
+    background-color:#504227;
+}
+.fg3 {
+    background-color:#79643b;
+}
+.fg4 {
+    background-color:#a1854e;
+}
+.fg5 {
+    background-color:#c9a662;
+}
+.fg6 {
+    background-color:#d4b881;
+}
+.fg7 {
+    background-color:#dfcaa1;
+}
+.fg8 {
+    background-color:#f4ede0;
+}
+.border1 {
+    border:solid 1px;
+}
+.absdate {
+    cursor: hand;
+    cursor: pointer;
+    background:url('../img/Calendar30-20.png') no-repeat right;
+    background-color:#fff;
+}
+.white{
+    color:#ffffff;
+}
+.gray{
+    color:gray;
+}
+.black{
+    color:black;
+}
+.blue{
+    color:blue;
+}
+@media print{
+    #header{
+        display:none;
+    }
+    .print-button{
+        display:none;
+    }
+}

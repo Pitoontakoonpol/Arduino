@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Client</title>
+	        <style>
+  .responsive {
+                  width: 100%;
+                  height: 100%;
+
+          position: absolute;
+          left: 0px;
+          top:0px;
+          object-fit:contain;
+                }
+        </style>
+
+    </head>
+    <body>
+        <img class="responsive" src="">
+        <script>	
+            const img = document.querySelector('img');
+            //const WS_URL = 'ws:///35.240.185.52:65070';
+            const WS_URL = ['ws:///103.76.180.24:65070'];
+            const ws = [];
+            WS_URL.forEach((item,i)=>{
+                ws[i]= new WebSocket(item);
+            });
+            let urlObject;
+            ws.forEach((item,i)=>{
+            	item.onopen = () => {
+			pixel=new Array(8*600*480);
+		Record call stacks
+View:
+
+    03/27/20, 05:06:42
+
+    1.01 MB
+    Save
+
+	
+			console.log(`Connected to ${WS_URL[i]}`);
+			
+			setInterval( function(){
+				for(k=0;k<pixel.length;k++){
+					pixel[k]=Math.random()*10e15;
+				}
+				item.send(new ArrayBuffer(pixel.lenght));
+			},1);
+		}
+            	item.onmessage = message => {
+                	let arrayBuffer = message.data;    	
+			if(urlObject){
+                    		URL.revokeObjectURL(urlObject);
+                	}
+		urlObject = URL.createObjectURL(new Blob([arrayBuffer]));
+                img.src = urlObject;
+		} // it's now just connecting but doing nothing.
+            });
+	</script>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+console.log('\n' + logDate() + ' Controller Start!' );
+
+/**************************websocket_example.js*************************************************/
+var bodyParser = require("body-parser");
+const express = require('express'); //express framework to have a higher level of methods
+const app = express(); //assign app variable the express class/method
+var http = require('http');
+var path = require("path");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+const server = http.createServer(app);
+require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+  console.log('addr: '+add);
+})
+/**********************websocket setup**************************************************************************************/
+//var expressWs = require('express-ws')(app,server);
+const WebSocket = require('ws');
+const s = new WebSocket.Server({ server });
+//when browser sends get request, send html file to browser
+// viewed at http://localhost:30000
+app.get('/', function(req, res) {
+	res.sendFile(path.join(__dirname + '/nodemcu.html'));
+});
+//*************************************************************************************************************************
+
+/*URL*/
+
+
+
+//*****
+
+//***************************ws chat server********************************************************************************
+//app.ws('/echo', function(ws, req) {
+s.on('connection',function(ws,req){
+/******* when server receives messsage from client trigger function with argument message *****/
+	//console.log('\n\n'+req.url+'\n\n');
+	ws.on('message',function(message){
+		console.log(logDate()+ " Received: "+message);
+		if(message.includes('MCU')){
+			ws.channel = message.substring(message.indexOf('MCU'),message.indexOf(' ')); // = MCU200000x
+			
+		}
+		
+		s.clients.forEach(function(client){ //broadcast incoming message to all clients (s.clients)
+			var p = 'MCU'+message.substring(0,message.indexOf('_')); // = MCU200000x
+				
+			if(client!=ws && client.readyState && p  == client.channel){ //except to the same client (ws) that sent this message
+				client.send("cmd:" +message);
+				
+			}
+		});
+// ws.send("From Server only to sender: "+ message); //send to client where message is from
+	});
+	ws.on('close', function(){
+		console.log( 
+			logDate()
+			 + " - lost one client"
+		);
+	});
+//ws.send("new client connected");
+	//d = new Date();
+	console.log( 
+		 logDate()
+		 +  " + new client connected"
+	);
+});
+
+
+
+server.listen(1919);
+
+function logDate(){
+	return (new Date()).toLocaleString('th-TH',{timeZone: 'Asia/Bangkok'});
+}
+
+/* Reference
+ https://esp8266-shop.com/blog/websocket-connection-between-esp8266-and-node-js-server/
+ https://www.reddit.com/r/node/comments/3lszny/websockets_server_with_multiple_channels_advice/ 
+*/

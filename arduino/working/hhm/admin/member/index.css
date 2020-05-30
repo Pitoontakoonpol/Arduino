@@ -1,0 +1,67 @@
+button img {
+  width:30px;
+}
+#main-header{
+  overflow:hidden;
+  border:solid 1px #fff;
+}
+
+#button-bar{
+  position:fixed;right:0;top:100px;text-align:right;
+}
+.main-table{
+  background-color:#ddd;
+}
+.main-table td{
+  padding:3px;
+  font:normal 13px sans-serif;
+  background-color:#fff;
+  border-bottom:solid 1px #ccc;
+  height:70px; /* relate to index.php <input type='hidden' id='td_height'>*/
+}
+.main-table td:nth-child(1){
+  width:30px;
+  text-align:center;
+}
+.main-table td:nth-child(2){
+  width:50px;
+}
+.main-form th{
+  font:bold 13px sans-serif;
+  text-align:right;
+}
+.main-form td{
+  font:normal 13px sans-serif;
+  text-align:left;
+}
+.main-form span{
+  text-align:left;
+}
+.main-form div{
+  text-align:left;
+}
+#button-bar div{
+  margin-top:5px;
+}
+#button-bar img{
+  width:40px;
+}
+.front-row{
+  border-left:solid 5px #fff;
+}
+#map {
+  width: 100%;
+  max-width:800px;
+  height: 400px;
+  background-color: grey;
+}
+#main-center{
+  border:solid 1px;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+#main-center-edit{
+  width:700px;
+  overflow-x:auto;
+  overflow-y:auto;
+}

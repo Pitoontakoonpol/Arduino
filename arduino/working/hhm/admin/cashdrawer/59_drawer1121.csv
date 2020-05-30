@@ -1,0 +1,8 @@
+"AmbientPOS Export (Cash Drawer)"
+"Export Branch",59
+"Data From",11/05/2019,00:00:00
+"Data to",11/05/2019,23:59:58
+
+
+,Date,Time,Title,Method,Send,Cash-In,Cash-Out,POS,Staff,Remark
+,,,Total,,0.00,0.00,0.00,0.00,,
